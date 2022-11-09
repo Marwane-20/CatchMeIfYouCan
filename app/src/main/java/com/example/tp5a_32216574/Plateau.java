@@ -11,11 +11,7 @@ import android.widget.Toast;
 
 
 public class Plateau extends View {
-    private final float MAX_X = 478;
-    private final float MAX_Y = 772f;
-
-    private float w,h;
-
+   
     private Paint paint;
     private Paint paint_RED,paint_BLUE;
     private float[][] points;
@@ -41,7 +37,7 @@ public class Plateau extends View {
         super.onDraw(canvas);
         points = computeCenters();
         ray = computeRadius();
-        canvas.drawLine(0,772/2,478,772/2,paint);
+        canvas.drawLine(0,getHeight()/2,getWidth(),getHeight()/2,paint);
         for(int i = 0;i < points.length;i++){
             if(i == red_loc)
                 canvas.drawCircle(points[i][0],points[i][1],ray,paint_RED);
@@ -73,7 +69,7 @@ public class Plateau extends View {
         switch ( e.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 h = e.getY();
-                if(h < MAX_Y/2) {
+                if(h < getHeight()/2) {
                     red_loc++;
                     if (red_loc > 9)
                         red_loc = 0;
@@ -82,7 +78,7 @@ public class Plateau extends View {
                         red_loc =0;blue_loc=5;
                     }
                 }
-                else if(h > MAX_Y/2){
+                else if(h > getHeight()/2){
                     blue_loc++;
                 if(blue_loc > 9)
                     blue_loc = 0;
